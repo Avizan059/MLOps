@@ -56,7 +56,7 @@ def draft_value():
           type: file
           required: true
           
-        - name: file
+        - name: file1
           in :  formData
           type: file
           required: true
@@ -67,15 +67,16 @@ def draft_value():
             
   
     """
-    
-    df_test= pd.read_csv(request.files.get('file'))
     df_train = pd.read_csv(request.files.get('file'))
+    
+    df_test= pd.read_csv(request.files.get('file1'))
     
     
    
     draft=drift_fn(df_train,df_test)
     
-    return render_template('table.html', tables=[draft.to_html()], titles=['']) 
+    return str(draft)
+#render_template('table.html', tables=[draft.to_html()], titles=['']) 
     
 
 if __name__=='__main__':
